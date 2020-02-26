@@ -46,10 +46,13 @@ public class HomeController {
         employeeRepository.save(employee);
         return "redirect:/";
     }
+    @RequestMapping("/search")
+    public String search(@RequestParam("search") String search, Model model){
+        model.addAttribute("companySearch", companyRepository.findByName(search));
+        model.addAttribute("employeeFNSearch", employeeRepository.findByFirstName(search));
+        model.addAttribute("employeeLNSearch", employeeRepository.findByLastName(search));
+        return "list";
+    }
 }
-//    @RequestMapping("/detail/{id}")
-//    public String showCompany(@PathVariable("id") long id, Model model){
-//        model.addAttribute("company", companyRepository.findById(id).get());
-//        return "list";
-//    }
+
 
