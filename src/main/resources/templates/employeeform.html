@@ -53,10 +53,10 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Contact</a></li>
+                <li class="active"><a href="showemployees.html">List/Update Employees</a></li>
+                <li class="active"><a href="showcompanies.html">List/Update Companies</a></li>
+               <!-- <li><a href="#">Projects</a></li>
+                <li><a href="#">Contact</a></li>&ndash;&gt;-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <form th:action="@{/search}" method="post">
@@ -74,6 +74,10 @@
 
         </div>
         <div class="col-sm-8 text-center">
+            <br><br>
+            <br><br>
+            <br><br>
+            <hr>
             <form th:action="@{/processemployee}" th:object="${employee}" method="post"
                   enctype="multipart/form-data">
                 <input type="hidden" th:field="*{id}">
@@ -89,6 +93,8 @@
                 </select>
                 <input type="submit" value="Submit" />
             </form>
+            <br><br>
+            <hr>
             </div>
         </div>
         <div class="col-sm-2 sidenav">

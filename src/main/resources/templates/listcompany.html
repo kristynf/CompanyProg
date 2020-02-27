@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Enter Employee Information</title>
+    <title>List Companies</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -49,15 +49,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand" href="/">Home</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="showemployees.html">List/Update Employees</a></li>
                 <li class="active"><a href="showcompanies.html">List/Update Companies</a></li>
-                <!--<li><a href="#">Projects</a></li>
-                <li><a href="#">Contact</a></li>-->
-            </ul>
+                <!--  <li><a href="#">Projects</a></li>
+                  <li><a href="#">Contact</a></li>-->
+            </ul>-->
             <ul class="nav navbar-nav navbar-right">
                 <form th:action="@{/search}" method="post">
                     <input type="text" name="search" placeholder="Enter search name" required>
@@ -74,28 +74,30 @@
 
         </div>
         <div class="col-sm-8 text-center">
-            <br><br>
-            <br><br>
-            <br><br>
-            <hr>
-            <form th:action="@{/processcompany}" th:object="${company}" method="post"
-                  enctype="multipart/form-data">
-                <input type="hidden" th:field="*{id}">
-                Name: <input type="text" placeholder="name" th:field="*{name}">
-                <input type="submit" value="Submit" /></form>
-            <br>
-            <hr>
-    </div>
-    <div class="col-sm-2 sidenav">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <td>Actions</td>
+                </tr>
+                <tr>
+                    <td th:text="${company.name}"></td>
+                    <td>
+                        <a th:href="@{/update/{id}(id=${company.id})}">Update Company</a>
+                        <a th:href="@{/detail/{id}(id=${company.id})}">Company Details</a>
+                        <a th:href="@{/delete/{id}(id=${company.id})}">Delete Company</a>
+                    </td></tr>
+            </table>
 
+        </div>
+        <div class="col-sm-2 sidenav">
+
+        </div>
     </div>
-</div>
 </div>
 
 <footer class="container-fluid text-center">
     <p>Copyright(c) KFerbs 2020</p>
 </footer>
 
-</form>
 </body>
 </html>

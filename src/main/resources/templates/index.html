@@ -53,10 +53,10 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Contact</a></li>
+                <li class="active"><a href="/templates/showemployees.html">List/Update Employees</a></li>
+                <li class="active"><a href="/templates/showcompanies.html">List/Update Companies</a></li>
+                <!--<li><a href="#">Projects</a></li>
+                <li><a href="#">Contact</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <form th:action="@{/search}" method="post">
@@ -74,16 +74,19 @@
 
         </div>
         <div class="col-sm-8 text-center">
-            <h2><a href="/addcompany">Add a Company</a></h2>
-            <h2><a href="/addemployee">Add an Employee</a></h2>
+            <h2><button type="button" class="btn btn-outline-primary"><a href="/addcompany">Add a Company</a></button></h2>
+            <h2><button type="button" class="btn btn-outline-info"><a href="/addemployee">Add an Employee</a></button></h2>
 
             <h1 align="center">Company List</h1>
+<!--            <div align="center">-->
             <div th:each="company: ${companies}">
-                <ul th:each="employee: ${company.employees}">
-                    <b><p th:text="${company.name}"></p></b>
-                    <p th:inline="text">[[${employee.firstName}]] [[${employee.lastName}]] and [[${employee.position}]]</p>
-                </ul>
+                <b><p th:text="${company.name}"></p></b>
+                <div th:each="employee: ${company.employees}">
+
+                    <p th:inline="text">[[${employee.firstName}]] [[${employee.lastName}]],  [[${employee.position}]]</p>
+                </div>
             </div>
+
         </div>
         <div class="col-sm-2 sidenav">
 

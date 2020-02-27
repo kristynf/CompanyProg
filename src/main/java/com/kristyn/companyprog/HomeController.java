@@ -49,10 +49,51 @@ public class HomeController {
     @RequestMapping("/search")
     public String search(@RequestParam("search") String search, Model model){
         model.addAttribute("companySearch", companyRepository.findByName(search));
-        model.addAttribute("employeeFNSearch", employeeRepository.findByFirstName(search));
-        model.addAttribute("employeeLNSearch", employeeRepository.findByLastName(search));
+        model.addAttribute("employeeFNSearch", employeeRepository.findByFirstNameIgnoreCase(search));
+        model.addAttribute("employeeLNSearch", employeeRepository.findByLastNameIgnoreCase(search));
         return "list";
     }
+    @RequestMapping("detailc/{id}")
+    public String showCompany(@PathVariable("id") long id, Model model){
+        model.addAttribute("company", companyRepository.findById(id).get());
+        return "showcompanies";
+    }
+    @RequestMapping("detaile/{id}")
+    public String showEmployee(@PathVariable("id") long id, Model model){
+        model.addAttribute("employee", employeeRepository.findById(id).get());
+        return "showemployees";
+    }
+    @RequestMapping("updatec/{id}")
+    public String updateCompany(@PathVariable("id") long id, Model model){
+        model.addAttribute("company", companyRepository.findById(id).get());
+        return "showcompanies";
+    }
+    @RequestMapping("updatee/{id}")
+    public String updateEmployee(@PathVariable("id") long id, Model model){
+        model.addAttribute("employee", employeeRepository.findById(id).get());
+        return "showemployees";
+    }
+    @RequestMapping("deletec/{id}")
+    public String deleteCompany(@PathVariable("id") long id, Model model){
+        companyRepository.deleteById(id);
+        return "redirect:/";
+    }
+    @RequestMapping("deletee/{id}")
+    public String deleteEmployee(@PathVariable("id") long id, Model model){
+        employeeRepository.deleteById(id);
+        return "redirect:/";
+    }
+    @RequestMapping("/listcomp")
+    public String listCompanies(Model model){
+        model.addAttribute("companies", companyRepository.findAll());
+        return "listcompany";
+    }
+    @RequestMapping("/listemp")
+    public String listEmployees(Model model){
+        model.addAttribute("employees", employeeRepository.findAll());
+        return "listemployee";
+    }
+
 }
 
 
