@@ -58,8 +58,8 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="showemployees.html">List/Update Employees</a></li>
-                <li class="active"><a href="showcompanies.html">List/Update Companies</a></li>
+                <li class="active"><a href="showemployee.html">List/Update Employees</a></li>
+                <li class="active"><a href="showcompany.html">List/Update Companies</a></li>
               <!--  <li><a href="#">Projects</a></li>
                 <li><a href="#">Contact</a></li>&ndash;&gt;-->
             </ul>
@@ -85,15 +85,46 @@
                 <th:block>
                     <div th:each="company : ${companySearch}">
                         <h1 th:text="${company.name}"></h1>
+                        <h2><a th:href="@{/detailc/{id}(id=${company.id})}">
+                            <button type="button" class="btn btn-primary">Company Details</button>
+                        </a>
+                        <a th:href="@{/updatec/{id}(id=${company.id})}">
+                            <button type="button" class="btn btn-primary">Update Company</button>
+                        </a>
+                        <a th:href="@{/deletec/{id}(id=${company.id})}">
+                            <button type="button" class="btn btn-primary">Delete Company</button>
+                        </a></h2>
                     </div>
                     <div th:each="employee: ${employeeFNSearch}">
                         <p th:inline="text">[[${employee.firstName}]] [[${employee.lastName}]] and Position:
                             [[${employee.position}]]</p>
+                        <h2><a th:href="@{/detaile/{id}(id=${employee.id})}">
+                            <button type="button" class="btn btn-primary">Employee Details</button>
+                        </a>
+                        <a th:href="@{/updatee/{id}(id=${employee.id})}">
+                            <button type="button" class="btn btn-primary">Update Employee</button>
+                        </a>
+                        <a th:href="@{/deletee/{id}(id=${employee.id})}">
+                            <button type="button" class="btn btn-primary">Delete Employee</button>
+                        </a></h2>
                     </div>
                     <div th:each="employee: ${employeeLNSearch}">
                         <p th:inline="text">[[${employee.firstName}]] [[${employee.lastName}]] and their position is:
                             [[${employee.position}]]</p>
+                        <h2><a th:href="@{/detaile/{id}(id=${employee.id})}">
+                            <button type="button" class="btn btn-primary">Employee Details</button>
+                        </a>
+                            <a th:href="@{/updatee/{id}(id=${employee.id})}">
+                                <button type="button" class="btn btn-primary">Update Employee</button>
+                            </a>
+                            <a th:href="@{/deletee/{id}(id=${employee.id})}">
+                                <button type="button" class="btn btn-primary">Delete Employee</button>
+                            </a></h2>
                     </div>
+
+
+
+
                 </th:block>
             </div>
 

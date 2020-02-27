@@ -14,7 +14,9 @@
         }
 
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .row.content {height: 450px}
+        .row.content {
+            height: 450px
+        }
 
         /* Set gray background color and 100% height */
         .sidenav {
@@ -36,7 +38,10 @@
                 height: auto;
                 padding: 15px;
             }
-            .row.content {height:auto;}
+
+            .row.content {
+                height: auto;
+            }
         }
     </style>
 </head>
@@ -53,8 +58,8 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/templates/showemployees.html">List/Update Employees</a></li>
-                <li class="active"><a href="/templates/showcompanies.html">List/Update Companies</a></li>
+                <li class="active"><a href="/showemps">List/Update Employees</a></li>
+                <li class="active"><a href="/showcomps">List/Update Companies</a></li>
                 <!--<li><a href="#">Projects</a></li>
                 <li><a href="#">Contact</a></li>-->
             </ul>
@@ -74,19 +79,62 @@
 
         </div>
         <div class="col-sm-8 text-center">
-            <h2><button type="button" class="btn btn-outline-primary"><a href="/addcompany">Add a Company</a></button></h2>
-            <h2><button type="button" class="btn btn-outline-info"><a href="/addemployee">Add an Employee</a></button></h2>
+            <h2>
+                <a th:href="@{/addcompany}"> <button type="button" class="btn btn-outline-primary">Add a Company</button></a>
+            </h2>
+                <a th:href="@{/addemployee}"><button type="button" class="btn btn-outline-info">Add an Employee</button></a>
+            </h2>
 
             <h1 align="center">Company List</h1>
-<!--            <div align="center">-->
-            <div th:each="company: ${companies}">
-                <b><p th:text="${company.name}"></p></b>
-                <div th:each="employee: ${company.employees}">
+            <table>
+                <th:block th:each="company: ${companies}">
+                    <th:block th:each="employee: ${company.employees}">
+                        <div >
+                            <thead>
+                            <tr font-style="font: bold" >
+                               <td align="center">Company Name</td>
+                              <td align="center">Employee Name</td>
+                               <td align="center">Employee Position</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
 
-                    <p th:inline="text">[[${employee.firstName}]] [[${employee.lastName}]],  [[${employee.position}]]</p>
-                </div>
-            </div>
+                                <td align="center"  th:text="${company.name}"></td>
+                                <td align="center" th:inline="text" >[[${employee.firstName}]] [[${employee.lastName}]]</td>
+                                <td align="center" th:text="${employee.position}"></td>
+                            </tr>
+                            <tr>
 
+                                <td>
+                                    <a th:href="@{/detailc/{id}(id=${company.id})}">
+                                        <button type="button" class="btn btn-primary">Company Details</button>
+                                    </a>
+                                    <a th:href="@{/updatec/{id}(id=${company.id})}">
+                                        <button type="button" class="btn btn-primary">Update Company</button>
+                                    </a>
+                                    <a th:href="@{/deletec/{id}(id=${company.id})}">
+                                        <button type="button" class="btn btn-primary">Delete Company</button>
+                                    </a>
+                                </td>
+                                <td><a th:href="@{/detaile/{id}(id=${employee.id})}">
+                                    <button type="button" class="btn btn-primary">Employee Details</button>
+                                </a>
+                                    <a th:href="@{/updatee/{id}(id=${employee.id})}">
+                                        <button type="button" class="btn btn-primary">Update Employee</button>
+                                    </a>
+                                    <a th:href="@{/deletee/{id}(id=${employee.id})}">
+                                        <button type="button" class="btn btn-primary">Delete Employee</button>
+                                    </a>
+                                </td>
+                            </tr>
+                            <br>
+                            <br>
+                            </tbody>
+                        </div>
+                    </th:block>
+                </th:block>
+            </table>
         </div>
         <div class="col-sm-2 sidenav">
 

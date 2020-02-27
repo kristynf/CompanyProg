@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List Employees</title>
+    <title>List Companies</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -52,12 +52,12 @@
             <a class="navbar-brand" href="/">Home</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/templates/showemployees.html">List/Update Employees</a></li>
-                <li class="active"><a href="/templates/showcompanies.html">List/Update Companies</a></li>
-                <!--     <li><a href="#">Projects</a></li>
-                     <li><a href="#">Contact</a></li>-->
-            </ul>
+             <ul class="nav navbar-nav">
+                 <li class="active"><a href="showemployee.html">List/Update Employees</a></li>
+                 <li class="active"><a href="showcompany.html">List/Update Companies</a></li>
+               <!--  <li><a href="#">Projects</a></li>
+                 <li><a href="#">Contact</a></li>-->
+             </ul>-->
             <ul class="nav navbar-nav navbar-right">
                 <form th:action="@{/search}" method="post">
                     <input type="text" name="search" placeholder="Enter search name" required>
@@ -74,20 +74,24 @@
 
         </div>
         <div class="col-sm-8 text-center">
-            <a href="/"
             <table>
                 <tr>
                     <th>Name</th>
                     <td>Actions</td>
                 </tr>
-                <tr>
-                    <td th:text="${employee.firstName}"></td>
-                    <td th:text="${employee.lastName}"></td>
-                    <td>
-                        <a th:href="@{/update/{id}(id=${employee.id})}">Update Employee</a>
-                        <a th:href="@{/detail/{id}(id=${employee.id})}">Employee Details</a>
-                        <a th:href="@{/delete/{id}(id=${employee.id})}">Delete Employee</a>
-                    </td></tr>
+               <tr>
+                <td th:text="${company.name}"></td>
+                   <td>
+                       <a th:href="@{/updatec/{id}(id=${company.id})}">
+                           <button type="button" class="btn btn-primary">Update Company</button>
+                       </a>
+                       <a th:href="@{/detailc/{id}(id=${company.id})}">
+                           <button type="button" class="btn btn-primary">Company Details</button>
+                       </a>
+                       <a th:href="@{/deletec/{id}(id=${company.id})}">
+                           <button type="button" class="btn btn-primary">Delete Company</button>
+                       </a>
+                   </td>></tr>
             </table>
 
         </div>

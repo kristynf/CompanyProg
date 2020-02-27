@@ -46,54 +46,81 @@ public class HomeController {
         employeeRepository.save(employee);
         return "redirect:/";
     }
+
     @RequestMapping("/search")
-    public String search(@RequestParam("search") String search, Model model){
+    public String search(@RequestParam("search") String search, Model model) {
         model.addAttribute("companySearch", companyRepository.findByName(search));
         model.addAttribute("employeeFNSearch", employeeRepository.findByFirstNameIgnoreCase(search));
         model.addAttribute("employeeLNSearch", employeeRepository.findByLastNameIgnoreCase(search));
         return "list";
     }
+
     @RequestMapping("detailc/{id}")
-    public String showCompany(@PathVariable("id") long id, Model model){
+    public String showCompany(@PathVariable("id") long id, Model model) {
         model.addAttribute("company", companyRepository.findById(id).get());
-        return "showcompanies";
+        return "showcompany";
     }
+
     @RequestMapping("detaile/{id}")
-    public String showEmployee(@PathVariable("id") long id, Model model){
+    public String showEmployee(@PathVariable("id") long id, Model model) {
         model.addAttribute("employee", employeeRepository.findById(id).get());
-        return "showemployees";
+        return "showemployee";
     }
+
     @RequestMapping("updatec/{id}")
-    public String updateCompany(@PathVariable("id") long id, Model model){
+    public String updateCompany(@PathVariable("id") long id, Model model) {
         model.addAttribute("company", companyRepository.findById(id).get());
-        return "showcompanies";
+        return "showcompany";
     }
+
     @RequestMapping("updatee/{id}")
-    public String updateEmployee(@PathVariable("id") long id, Model model){
+    public String updateEmployee(@PathVariable("id") long id, Model model) {
         model.addAttribute("employee", employeeRepository.findById(id).get());
-        return "showemployees";
+        return "showemployee";
     }
+
     @RequestMapping("deletec/{id}")
-    public String deleteCompany(@PathVariable("id") long id, Model model){
+    public String deleteCompany(@PathVariable("id") long id, Model model) {
         companyRepository.deleteById(id);
         return "redirect:/";
     }
+
     @RequestMapping("deletee/{id}")
-    public String deleteEmployee(@PathVariable("id") long id, Model model){
+    public String deleteEmployee(@PathVariable("id") long id, Model model) {
         employeeRepository.deleteById(id);
         return "redirect:/";
     }
+
     @RequestMapping("/listcomp")
-    public String listCompanies(Model model){
+    public String listCompanies(Model model) {
         model.addAttribute("companies", companyRepository.findAll());
-        return "listcompany";
+        return "showcompanies";
     }
+
     @RequestMapping("/listemp")
-    public String listEmployees(Model model){
+    public String listEmployees(Model model) {
         model.addAttribute("employees", employeeRepository.findAll());
-        return "listemployee";
+        return "showemployees";
+    }
+
+    @RequestMapping("/showemps")
+    public String showEmps() {
+        return "showemployees";
+    }
+
+    @RequestMapping("/showcomps")
+    public String showComps() {
+        return "showcompanies";
+    }
+
+    @RequestMapping("/showemp")
+    public String showEmp() {
+        return "showemployee";
+    }
+
+    @RequestMapping("/showcomp")
+    public String showComp() {
+        return "showcompany";
     }
 
 }
-
-

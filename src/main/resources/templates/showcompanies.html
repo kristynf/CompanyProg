@@ -14,7 +14,9 @@
         }
 
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .row.content {height: 450px}
+        .row.content {
+            height: 450px
+        }
 
         /* Set gray background color and 100% height */
         .sidenav {
@@ -36,7 +38,10 @@
                 height: auto;
                 padding: 15px;
             }
-            .row.content {height:auto;}
+
+            .row.content {
+                height: auto;
+            }
         }
     </style>
 </head>
@@ -52,12 +57,13 @@
             <a class="navbar-brand" href="/">Home</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-             <ul class="nav navbar-nav">
-                 <li class="active"><a href="showemployees.html">List/Update Employees</a></li>
-                 <li class="active"><a href="showcompanies.html">List/Update Companies</a></li>
-               <!--  <li><a href="#">Projects</a></li>
-                 <li><a href="#">Contact</a></li>-->
-             </ul>-->
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="showemployee.html">List/Update Employees</a></li>
+                <li class="active"><a href="showcompany.html">List/Update Companies</a></li>
+                <!--  <li><a href="#">Projects</a></li>
+                  <li><a href="#">Contact</a></li>-->
+            </ul>
+            -->
             <ul class="nav navbar-nav navbar-right">
                 <form th:action="@{/search}" method="post">
                     <input type="text" name="search" placeholder="Enter search name" required>
@@ -75,19 +81,31 @@
         </div>
         <div class="col-sm-8 text-center">
             <table>
-                <tr>
-                    <th>Name</th>
-                    <td>Actions</td>
-                </tr>
-               <tr>
-                <td th:text="${company.name}"></td>
-                <td>
-                    <a th:href="@{/update/{id}(id=${company.id})}">Update Company</a>
-                    <a th:href="@{/detail/{id}(id=${company.id})}">Company Details</a>
-                    <a th:href="@{/delete/{id}(id=${company.id})}">Delete Company</a>
-                </td></tr>
+                <th:block th:each="company: ${companies}">
+                    <div>
+                        <thead>
+                        <tr>
+                            <th>Company Name</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tr>
+                            <td th:text="${company.name}"></td>
+                            <td>
+                                <a th:href="@{/updatec/{id}(id=${company.id})}">
+                                    <button type="button" class="btn btn-primary">Update Company</button>
+                                </a>
+                                <a th:href="@{/detailc/{id}(id=${company.id})}">
+                                    <button type="button" class="btn btn-primary">Company Details</button>
+                                </a>
+                                <a th:href="@{/deletec/{id}(id=${company.id})}">
+                                    <button type="button" class="btn btn-primary">Delete Company</button>
+                                </a>
+                            </td>
+                        </tr>
+                    </div>
+                </th:block>
             </table>
-
         </div>
         <div class="col-sm-2 sidenav">
 
