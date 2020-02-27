@@ -70,13 +70,14 @@ public class HomeController {
     @RequestMapping("updatec/{id}")
     public String updateCompany(@PathVariable("id") long id, Model model) {
         model.addAttribute("company", companyRepository.findById(id).get());
-        return "showcompany";
+        return "companyform";
     }
 
     @RequestMapping("updatee/{id}")
     public String updateEmployee(@PathVariable("id") long id, Model model) {
         model.addAttribute("employee", employeeRepository.findById(id).get());
-        return "showemployee";
+        model.addAttribute("companies", companyRepository.findAll());
+        return "employeeform";
     }
 
     @RequestMapping("deletec/{id}")
